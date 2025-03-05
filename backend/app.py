@@ -9,6 +9,10 @@ app = Flask(__name__)
 @app.route("/rpi-sensor-data", methods=["GET"])
 def rpi_sensor_data():
     data = request.args  # Receive data from Raspberry Pi
+    # If Raspberry Pi sends JSON data, use the following line instead:
+    # data = request.get_json()
+    if not worker_id:
+        return jsonify({"error": "worker_id is required"}), 400
     worker_id = data.get("worker_id")
     
     # Save data to Firebase
@@ -27,7 +31,11 @@ def rpi_sensor_data():
 @app.route("/sensor-data", methods=["POST"])
 def sensor_data():
     data = request.json  # Receive data from other sources
+    if not data:
+        return jsonify({"error": "Request body must be JSON"}), 400
     worker_id = data.get("worker_id")
+    if not worker_id:
+        return jsonify({"error": "worker_id is required"}), 400
     
     # Save data to Firebase
     save_worker_data(worker_id, data)
@@ -45,6 +53,8 @@ def sensor_data():
 @app.route("/worker-status/<worker_id>", methods=["GET"])
 def worker_status(worker_id):
     status = get_worker_status(worker_id)
+    if not status:
+        return jsonify({"error": "Worker not found"}), 404
     return jsonify(status)
 
 if __name__ == "__main__":

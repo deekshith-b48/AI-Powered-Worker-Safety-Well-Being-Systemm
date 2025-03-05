@@ -61,7 +61,8 @@ def send_data_to_server():
             requests.post(f"{SERVER_URL}/rpi-sensor-data", json=data)
         except Exception as e:
             print(f"Error sending data to server: {e}")
-        data_queue.task_done()
+        finally:
+            data_queue.task_done()
         time.sleep(2)
 
 if __name__ == "__main__":
