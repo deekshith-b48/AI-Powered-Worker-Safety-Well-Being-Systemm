@@ -5,3 +5,16 @@ twilio
 numpy
 scipy
 tensorflow
+python-dotenv
+pandas
+scikit-learn
+openpyxl
+python-ultrasonic
+pigpio
+sounddevice
+audio Tools
+sensors
+os
+time
+joblib
+pytz

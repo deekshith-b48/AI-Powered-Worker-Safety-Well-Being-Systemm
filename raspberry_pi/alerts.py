@@ -1,3 +1,3 @@
-## alerts.py - Controls LEDs & Speaker alerts
-def trigger_alert():
+def trigger_alert(data):
     print("⚠️ Alert triggered! LED & Speaker activated.")
+    print(f"Alert Details: {data}")

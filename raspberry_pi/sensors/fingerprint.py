@@ -1,3 +1,12 @@
 import random
-def authenticate_user():
-    return random.choice(["Authorized", "Unauthorized"])
+
+class FingerprintSensor:
+    def __init__(self):
+        pass
+
+    def authenticate_user(self):
+        return random.choice(["Authorized", "Unauthorized"])
+
+if __name__ == "__main__":
+    sensor = FingerprintSensor()
+    print(sensor.authenticate_user())
